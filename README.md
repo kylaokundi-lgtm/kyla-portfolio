@@ -1,54 +1,86 @@
-🧠 How This Project Works (Under the Hood)
-If you're wondering how a simple webpage can upload, play, and remember videos and documents without a backend server or a database, here is the exact step-by-step breakdown of the logic.
+Process
+🎓 Level 6 CS Academic E-Portfolio
+This repository contains my academic e-portfolio, designed and developed to meet the requirements of my Level 6 Computer Science coursework. It serves as a centralized, interactive space to organize my exam papers, practical assessment videos, and image evidence across all my curriculum units.
 
-1. The "No Server" Architecture
-Most websites send your files to a server (like AWS or a database) to store them. This project does not do that. It is 100% client-side. Everything happens entirely inside your web browser using built-in browser APIs. This means your files never leave your computer, ensuring total privacy, but it also means we are limited by the browser's memory.
+Built by: Kyla Maria Jepchumba
+Admission No: TDC113-C002-0001/2024
+Course: Level 6 - Computer Science
+Live Demo: [➡️ Click here to view the deployed portfolio] (Add your Vercel/Netlify link here)
 
-2. The Unit Toggle (The Accordion Logic)
-When you look at the page, all units are closed. How does the page know which one to open?
+🧠 Why I Built This
+As a CS student, I needed a way to keep track of my progress, past papers, and practical evidence without losing files across different folders and flash drives. Instead of using a generic template, I coded this from scratch to ensure it perfectly matched my exact curriculum structure and allowed for direct file interaction right in the browser—no backend servers or databases required.
 
-There is a single variable in the script acting as a memory state: openU (which defaults to -1, meaning nothing is open).
-When you click "Operating Systems" (which is Unit #6, or index 5 in programming), the toggle(5) function runs.
-It checks: Is 5 equal to openU? If yes, it closes it (sets openU = -1). If no, it opens it (sets openU = 5).
-Then, it triggers the render() function to redraw the screen based on that new state.
-3. The Upload Process (The Magic Trick)
-This is the most important part of the project. When you click "Upload" and select a file, here is exactly what the JavaScript does:
+✨ Key Features
+Personalized Homepage: Features my profile picture, full name, admission number, academic level, and a detailed bio outlining my skills and career goals.           
+  -Interactive Unit Accordion: All 12 curriculum units are listed cleanly. Clicking a unit expands it to reveal its specific resources without cluttering the page.
+  -Comprehensive Exam Management: Every unit has dedicated, separate upload zones for CAT 1, CAT 2, and Mock Exams. Files can be uploaded, downloaded, or deleted instantly.                                                                                                                                                         
+  -Practical Evidence Vault: Technical units include dedicated sections for uploading practical assessment videos (which play inline) and image evidence (displayed in a hover-to-download gallery).                                                                                                                                   
+  -Smart Unit Filtering: The system automatically detects non-technical units (like Communication Skills) and hides the video/image uploads, restricting them to exam papers only.                                                                                                                                                  
+  -Persistent Local Storage: All uploaded files are saved directly to the browser's localStorage. The portfolio remembers everything even after the browser is closed.                                                                                                                                                            
+  -Fully Responsive: The layout adapts seamlessly from desktop grids to single-column mobile views.
+🛠️ Tech Stack
+  I kept the stack lightweight and native to prove that complex functionality doesn't require bloated frameworks:
 
-Catches the File: The <input type="file"> element detects a change and passes the file to a function called handleUp().
-Checks the Type: It looks at what section you are in. Did you upload a video? An image? A PDF? It routes the file to the correct category (e.g., vid, img, or c1).
-Reads the File: It uses a browser tool called FileReader. This takes the raw binary data of your video or PDF and translates it into a Base64 text string. (Base64 is that long string of random letters and numbers that represents a file).
-Saves to Memory: It pushes an object containing the file's name, its new Base64 url, and its size into the correct array for that specific unit.
-4. How It Remembers Your Files (localStorage)
-If you close the browser, normal webpage data disappears. To fix this, the project uses localStorage.
+HTML5 — Semantic structure and file input handling
+CSS3 — Custom dark theme, Grid/Flexbox layouts, hover animations, responsive breakpoints
+Vanilla JavaScript — DOM manipulation, FileReader API, and localStorage management
+Iconify — Scalable vector icons via CDN
+Google Fonts — Inter font family for clean readability
+📁 Project Structure
+text
+cs-e-portfolio/
+│
+├── index.html          # Main structure (Profile, Unit shells)
+├── style.css           # All styling, responsive rules, animations
+├── script.js           # App logic, file uploads, accordion toggle, storage
+├── README.md           # This file
+└── PROJECT_REPORT.md   # Detailed technical documentation
 
-Think of localStorage as a tiny digital locker assigned specifically to this webpage.
-Every time a file is added or deleted, the sv() (save) function runs.
-It takes our massive JavaScript object (which holds all 12 units and all their files) and uses JSON.stringify() to smash it into one giant block of text.
-It stuffs that text into the localStorage locker under the key "kj_d".
-When you open the page tomorrow, the very first line of JavaScript grabs "kj_d" from the locker and uses JSON.parse() to turn that text back into a working JavaScript object.
-5. The Render Cycle (Drawing the Screen)
-The page doesn't use complex frameworks like React to update the screen. It uses raw string concatenation.
+cs-e-portfolio/
+│
+├── index.html          # Main structure (Profile, Unit shells)
+├── style.css           # All styling, responsive rules, animations
+├── script.js           # App logic, file uploads, accordion toggle, storage
+├── README.md           # This file
+└── PROJECT_REPORT.md   # Detailed technical documentation
+🚀 How to Run Locally
+No npm install required. Just follow these steps:
 
-Whenever you open a unit, upload a file, or delete a file, the render() function runs.
-It loops through all 12 units. If a unit is closed, it just writes the HTML for the closed card.
-If a unit is open, it builds HTML for the exam papers, loops through any saved Base64 strings to create <video> or <img> tags, and writes the download links.
-It injects all this text into the main <div> using innerHTML. This essentially "redraws" the screen in a fraction of a second.
-6. The Technical vs Non-Technical Check
-How does the page know to hide the Video and Image uploaders for "Communication Skills" but show them for "Operating Systems"?
+Clone or download this repository to your local machine.
+Ensure index.html, style.css, and script.js are in the same folder.
+Double-click index.html to open it in any modern browser (Chrome recommended).
+📋 Curriculum Units Included
+The portfolio is structured specifically for my Level 6 units. Technical units are marked with their evidence capabilities.
 
-In the JavaScript, the list of units has a property: t:1 (technical) or t:0 (non-technical).
-When building the HTML for an open unit, the code simply asks: if(U[i].t).
-If the answer is true (1), it adds the HTML for the Video and Image panels. If false (0), it skips them entirely.
-7. Deleting Files
-When you click the trash icon on a file:
+Unit code  Unit name
+CCS101   	Fundamentals of Programming
+CCS102	  Mathematics for Computer Science	
+CCS103  	Basic Electronics
+CCS104  	Communication Skills	
+CCS105  	Work Ethics & Entrepreneurial Skills	
+CCS201	  Computer Organization & Architecture	
+CCS202	  Operating Systems
+CCS203	  Database Systems
+CCS204   	Web Design
+CCS205  	Graphics Design	
+CCS206  	Networking & Distributed Systems	
+CCS301  	Information Systems Development	
 
-The code identifies exactly where that file lives using three coordinates: Unit Index, Category (e.g., 'cat2' or 'img'), and File Index.
-It uses .splice() to surgically cut that specific file out of the array.
-It immediately saves the updated array to localStorage so the deletion is permanent.
-It triggers render() to refresh the screen so the deleted file disappears from view.
-⚠️ The One Big Trade-Off (Why file size matters)
-Because we convert files into Base64 text strings to store them in localStorage, files grow by about 33% in size when saved.
+⚠️ Note on Storage Limitations
+Because this project runs 100% client-side using localStorage, browsers enforce a strict storage limit (typically 5MB–10MB.                                         
+Think of localStorage as a tiny, invisible digital locker that lives inside your web browser. Every website you visit gets its own separate locker.
 
-If you upload a 3MB PDF, it takes up ~4MB of browser storage.
-Browsers strictly limit localStorage to about 5MB–10MB total.
-This is why the project is designed for evidence (screenshots, short clips, past papers) rather than massive files. It's a portfolio, not a Google Drive replacement!
+Because your e-portfolio doesn't use a backend server or a database (like MySQL), localStorage is the only way the website remembers the files you upload when you close the tab and come back later.
+
+Here is exactly how it works in your specific project:
+
+How your portfolio uses it:                                                                                                                                        
+  The Upload: When you upload a PDF or an image, the browser reads that file and translates it into a giant wall of text (called a Base64 string).
+  The Packing: JavaScript takes all your files for all 12 units, wraps them up into one big package, and labels it with the key "kj_d".
+  The Storage: It shoves that package into your browser's localStorage locker.                                                                                     
+  The Recall: The next time you open index.html, the very first line of JavaScript knocks on the locker door, asks for "kj_d", unpacks the text, and turns it back into downloadable videos, images, and PDFs. Files are converted to base64 strings to be saved. Therefore, this tool is optimized for past papers, screenshots, and short practical clips, not full-length lecture recordings.
+
+© 2025 Kyla Maria Jepchumba. All rights reserved.
+
+
+
