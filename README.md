@@ -80,7 +80,7 @@ How your portfolio uses it:
   The Storage: It shoves that package into your browser's localStorage locker.                                                                                     
   The Recall: The next time you open index.html, the very first line of JavaScript knocks on the locker door, asks for "kj_d", unpacks the text, and turns it back into downloadable videos, images, and PDFs. Files are converted to base64 strings to be saved. Therefore, this tool is optimized for past papers, screenshots, and short practical clips, not full-length lecture recordings.
 
-© 2025 Kyla Maria Jepchumba. All rights reserved.
+© 2026 Kyla Maria Jepchumba. All rights reserved.
 
 
 
