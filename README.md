@@ -52,19 +52,30 @@ Double-click index.html to open it in any modern browser (Chrome recommended).
 📋 Curriculum Units Included
 The portfolio is structured specifically for my Level 6 units. Technical units are marked with their evidence capabilities.
 
-Unit code  Unit name
-CCS101   	Fundamentals of Programming
-CCS102	  Mathematics for Computer Science	
-CCS103  	Basic Electronics
-CCS104  	Communication Skills	
-CCS105  	Work Ethics & Entrepreneurial Skills	
-CCS201	  Computer Organization & Architecture	
-CCS202	  Operating Systems
-CCS203	  Database Systems
-CCS204   	Web Design
-CCS205  	Graphics Design	
-CCS206  	Networking & Distributed Systems	
-CCS301  	Information Systems Development	
+Unit code                                                                                                                                                         Unit name                                                                                                                  
+CCS101                                                                                                                                                 	Fundamentals of Programming
+
+CCS102	                                                                                                                                               Mathematics for Computer Science	
+
+CCS103                                                                                                                                                      	Basic Electronics
+
+CCS104                                                                                                                                              	Communication Skills
+
+CCS105                                                                                                                                                       	Work Ethics & Entrepreneurial Skills	
+
+CCS201	                                                                                                                                                     Computer Organization & Architecture	
+
+CCS202                                                                                                                                                	  Operating Systems
+
+CCS203                                                                                                                                                   	  Database Systems
+
+CCS204                                                                                                             Web Design
+
+CCS205  Graphics Design	
+
+CCS206  Networking & Distributed Systems
+
+CCS301  Information Systems Development	
 
 ⚠️ Note on Storage Limitations
 Because this project runs 100% client-side using localStorage, browsers enforce a strict storage limit (typically 5MB–10MB.                                         
