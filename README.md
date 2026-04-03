@@ -75,8 +75,8 @@ Because your e-portfolio doesn't use a backend server or a database (like MySQL)
 Here is exactly how it works in your specific project:
 
 How your portfolio uses it:                                                                                                                                        
-  The Upload: When you upload a PDF or an image, the browser reads that file and translates it into a giant wall of text (called a Base64 string).
-  The Packing: JavaScript takes all your files for all 12 units, wraps them up into one big package, and labels it with the key "kj_d".
+  The Upload: When you upload a PDF or an image, the browser reads that file and translates it into a giant wall of text (called a Base64 string).                       
+  The Packing: JavaScript takes all your files for all 12 units, wraps them up into one big package, and labels it with the key "kj_d".                             
   The Storage: It shoves that package into your browser's localStorage locker.                                                                                     
   The Recall: The next time you open index.html, the very first line of JavaScript knocks on the locker door, asks for "kj_d", unpacks the text, and turns it back into downloadable videos, images, and PDFs. Files are converted to base64 strings to be saved. Therefore, this tool is optimized for past papers, screenshots, and short practical clips, not full-length lecture recordings.
 
