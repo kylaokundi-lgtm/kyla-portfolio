@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kyla Maria Jepchumba — CS Portfolio</title>
+<title>Kyla's Portfolio</title>
 <link rel="stylesheet" href="CSS/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
 </head>
 <body>
 <nav>
-<div style="display:flex;align-items:center;gap:.4rem"><span class="iconify" style="color:#f97316;font-size:1.1rem" data-icon="ph:code-bold"></span><span style="font-weight:600;font-size:.8rem">CS Portfolio</span></div>
+<div style="display:flex;align-items:center;gap:.4rem"><span class="iconify" style="color:#f97316;font-size:1.1rem" data-icon="ph:code-bold"></span><span style="font-weight:600;font-size:.8rem">Kyla's Portfolio</span></div>
+<div class="nav-links">
+<a href="#home">Home</a>
 <a href="#units">Units</a>
+<a href="#evidence">Evidence</a>
+<a href="#media">Videos</a>
+<a href="#contact">Contact</a>
+</div>
 </nav>
-<section class="hero">
+<section class="hero" id="home">
 <a href="photo/kyla.jpeg" target="_blank" rel="noopener noreferrer">
   <img class="av" src="photo/kyla.jpeg" alt="Kyla Maria Jepchumba profile photo" style="width:5.5rem;height:5.5rem;border-radius:50%;object-fit:cover;border:2px solid rgba(249,115,22,.4);">
 </a>
@@ -26,16 +32,32 @@
   <div>📞 <a href="tel:+254728703451" style="color:inherit;text-decoration:none">0728 703 451</a></div>
   <div>✉️ <a href="mailto:kyla.okundi@students.jkuat.ac.ke" style="color:inherit;text-decoration:none">kyla.okundi@students.jkuat.ac.ke</a></div>
 </div>
-<figure style="margin-top:1.2rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;">
-  <a href="images/Screenshot 2026-03-31 165150.png" target="_blank" rel="noopener noreferrer">
-    <img src="images/Screenshot 2026-03-31 165150.png" alt="Project screenshot" style="width:100%;max-width:28rem;border-radius:.8rem;object-fit:cover;box-shadow:0 10px 35px rgba(0,0,0,.18);" />
-  </a>
-  <figcaption style="font-size:.85rem;color:#a8a29e;">Project screenshot (click to open)</figcaption>
-</figure>
 </section>
 <section id="units" class="wrap">
 <h2 class="st">Curriculum Units</h2>
+<div class="unit-input">
+  <input id="newUnitCode" type="text" placeholder="Unit code (e.g. CCS302)">
+  <input id="newUnitName" type="text" placeholder="Unit name">
+  <button onclick="addCurriculumUnit()">Add Unit</button>
+</div>
 <div id="uC" class="grid"></div>
+</section>
+<section id="evidence" class="wrap">
+<h2 class="st">Project Evidence & Screenshots</h2>
+<div class="gallery">
+  <figure class="gallery-item">
+    <a href="images/coding.png" target="_blank" rel="noopener noreferrer">
+      <img src="images/coding.png" alt="Project screenshot" />
+    </a>
+    <figcaption>Project Implementation Screenshot</figcaption>
+  </figure>
+  <figure class="gallery-item">
+    <a href="images/e-portfolio.png" target="_blank" rel="noopener noreferrer">
+      <img src="images/e-portfolio.png" alt="Project documentation" />
+    </a>
+    <figcaption>Project Documentation</figcaption>
+  </figure>
+</div>
 </section>
 <section id="media" class="wrap">
 <h2 class="st">Video Portfolio</h2>
@@ -54,7 +76,22 @@
   </div>
 </div>
 </section>
+<section id="contact" class="wrap">
+<h2 class="st">Get In Touch</h2>
+<div style="text-align:center;color:#a8a29e;font-size:.9rem;line-height:2">
+  <div>📍 JKUAT, Karen Campus</div>
+  <div>📞 <a href="tel:+254728703451" style="color:#fb923c;text-decoration:none">0728 703 451</a></div>
+  <div>✉️ <a href="mailto:kyla.okundi@students.jkuat.ac.ke" style="color:#fb923c;text-decoration:none">kyla.okundi@students.jkuat.ac.ke</a></div>
+</div>
+</section>
 <footer>Kyla Maria Jepchumba &middot; TDC113-C002-0001/2024 &middot; Level 6 Computer Science &copy; 2025</footer>
+<div id="mediaViewer" class="media-viewer" onclick="if(event.target.id==='mediaViewer'){closeViewer();}">
+  <div class="media-content">
+    <button class="viewer-close" onclick="event.stopPropagation();closeViewer()">&times;</button>
+    <h4 id="viewerTitle"></h4>
+    <div id="viewerBody"></div>
+  </div>
+</div>
 <div id="toast"><div class="tb"><span class="iconify" style="color:#4ade80" data-icon="ph:check-circle-bold"></span><span id="tM"></span></div></div>
 <script src="JS/script.js"></script>
 </body>
