@@ -17,6 +17,9 @@ if(savedUnits && Array.isArray(savedUnits) && savedUnits.length){U = savedUnits;
 var E=[{k:"c1",l:"CAT 1"},{k:"c2",l:"CAT 2"},{k:"mk",l:"Mock Exam"}];
 var D=JSON.parse(localStorage.getItem("kj_d")||"{}"),O=-1;
 
+// Default PDF data for Web Design unit CAT 2
+var WEB_DESIGN_PDF = {n:'web design .pdf', u:'files/web design .pdf', s:0};
+
 function toast(m){var t=document.getElementById("toast");document.getElementById("tM").textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show")},2200)}
 function fmt(b){return b<1024?b+"B":b<1048576?(b/1024).toFixed(1)+"KB":(b/1048576).toFixed(1)+"MB"}
 function rd(f){return new Promise(function(r){var d=new FileReader();d.onload=function(e){r(e.target.result)};d.readAsDataURL(f)})}
@@ -31,7 +34,7 @@ function deleteUnit(i){if(!confirm('Delete unit "'+U[i].n+'"?'))return;U.splice(
 function addCurriculumUnit(){var code=document.getElementById('newUnitCode').value.trim();var name=document.getElementById('newUnitName').value.trim();if(!code||!name){toast('Enter unit code and name');return;}U.push({c:code,n:name,ic:'ph:bookmark-simple-bold',t:1});sv();document.getElementById('newUnitCode').value='';document.getElementById('newUnitName').value='';render();toast('Unit added')} 
 function openViewer(i,k,idx){var item=(D[i]&&D[i][k]&&D[i][k][idx]);if(!item)return;var body=document.getElementById('viewerBody'),title=document.getElementById('viewerTitle');body.innerHTML='';title.textContent=item.n||'Preview';if(k==='vid'){var v=document.createElement('video');v.controls=true;v.src=item.u;v.autoplay=true;body.appendChild(v);}else if(k==='img'){var img=document.createElement('img');img.src=item.u;img.alt=item.n||'Image Preview';body.appendChild(img);}document.getElementById('mediaViewer').classList.add('show')}
 function closeViewer(){document.getElementById('mediaViewer').classList.remove('show');document.getElementById('viewerBody').innerHTML='';document.getElementById('viewerTitle').textContent=''}
-function viewPaper(i,k,j,type){var item=D[i][k][j];if(!item)return;var body=document.getElementById('viewerBody'),title=document.getElementById('viewerTitle');body.innerHTML='';title.textContent=(type==='question'?'Question Paper: ':'Answer: ')+item.n;if(type==='question'){body.innerHTML='<div style="text-align:center;padding:2rem;color:#a8a29e;"><span class="iconify" style="font-size:3rem;color:#fb923c" data-icon="ph:question-bold"></span><p style="margin-top:1rem;font-size:1.1rem;">Question paper content would be displayed here</p><p style="font-size:.9rem;margin-top:.5rem;">This is a placeholder for the question paper viewer</p></div>';}else{body.innerHTML='<div style="text-align:center;padding:2rem;color:#a8a29e;"><span class="iconify" style="font-size:3rem;color:#4ade80" data-icon="ph:check-circle-bold"></span><p style="margin-top:1rem;font-size:1.1rem;">Answer content would be displayed here</p><p style="font-size:.9rem;margin-top:.5rem;">This is a placeholder for the answer viewer</p></div>';}document.getElementById('mediaViewer').classList.add('show')}
+function viewPaper(i,k,j,type){var item=D[i][k][j];if(!item)return;var body=document.getElementById('viewerBody'),title=document.getElementById('viewerTitle');body.innerHTML='';title.textContent=(type==='question'?'Question Paper: ':'Answer: ')+item.n;if(item.u.endsWith('.pdf')){body.innerHTML='<div style="text-align:center;padding:2rem"><iframe style="width:100%;height:600px;border:1px solid #e5e7eb;border-radius:.8rem" src="'+item.u+'"></iframe><p style="margin-top:1rem;font-size:.9rem;color:#a8a29e;"><a href="'+item.u+'" target="_blank" rel="noopener noreferrer">Open in new tab →</a></p></div>';}else if(type==='question'){body.innerHTML='<div style="text-align:center;padding:2rem;color:#a8a29e;"><span class="iconify" style="font-size:3rem;color:#fb923c" data-icon="ph:question-bold"></span><p style="margin-top:1rem;font-size:1.1rem;">Question paper content would be displayed here</p><p style="font-size:.9rem;margin-top:.5rem;">This is a placeholder for the question paper viewer</p></div>';}else{body.innerHTML='<div style="text-align:center;padding:2rem;color:#a8a29e;"><span class="iconify" style="font-size:3rem;color:#4ade80" data-icon="ph:check-circle-bold"></span><p style="margin-top:1rem;font-size:1.1rem;">Answer content would be displayed here</p><p style="font-size:.9rem;margin-top:.5rem;">This is a placeholder for the answer viewer</p></div>';}document.getElementById('mediaViewer').classList.add('show')}
 function rm(i,k,j){D[i][k].splice(j,1);sv();render();toast("Removed")}
 function upL(i,k,a,l){return '<label class="uz"><span class="iconify" data-icon="ph:upload-simple-bold"></span>'+l+'<input type="file" accept="'+a+'" multiple onchange="hU('+i+',\''+k+'\',this)"></label>'}
 function pR(i,k,j,f){return '<div class="fr"><div class="fi"><span class="iconify" data-icon="ph:file-pdf-bold"></span><a href="'+f.u+'" download="'+f.n+'">'+f.n+'</a><span class="sz">'+fmt(f.s)+'</span></div><div class="paper-actions"><button onclick="viewPaper('+i+',\''+k+'\','+j+',\'question\')" title="View Question Paper"><span class="iconify" data-icon="ph:question-bold"></span></button><button onclick="viewPaper('+i+',\''+k+'\','+j+',\'answer\')" title="View Answer"><span class="iconify" data-icon="ph:check-circle-bold"></span></button><button onclick="event.stopPropagation();rm('+i+',\''+k+'\','+j+')"><span class="iconify" data-icon="ph:x-bold"></span></button></div></div>'}
@@ -67,4 +70,20 @@ function bC(i){var d=gd(i),h='<div class="body"><div class="eg">';for(var e=0;e<
 function render(){var h='';for(var i=0;i<U.length;i++){var u=U[i],o=O===i;h+='<div class="cd'+(o?' op':'')+'"><div class="cb" onclick="tg('+i+')"><div class="l"><div class="ib"><span class="iconify" data-icon="'+u.ic+'"></span></div><div><div class="un">'+u.n+'</div><div class="uc">'+u.c+'</div></div></div><div class="r">';if(u.t)h+='<span class="badge">Technical</span>';h+='<span class="iconify ch" data-icon="ph:caret-down-bold"></span></div></div><button class="unit-delete" onclick="event.stopPropagation();deleteUnit('+i+')" title="Delete this unit"><span class="iconify" data-icon="ph:trash-simple-bold"></span></button>';if(o)h+=bC(i);h+='</div>'}document.getElementById("uC").innerHTML=h}
 function tg(i){O=O===i?-1:i;render()}
 async function hU(i,k,el){var fs=el.files;if(!fs.length)return;gd(i);if(k==="vid"){for(var f=0;f<fs.length;f++){if(fs[f].size>52428800)continue;D[i].vid.push({n:fs[f].name,u:await rd(fs[f]),s:fs[f].size})}toast(fs.length+" video(s) added")}else if(k==="img"){for(var f=0;f<fs.length;f++){if(!fs[f].type.startsWith("image/"))continue;D[i].img.push({n:fs[f].name,u:await rd(fs[f]),s:fs[f].size})}toast(fs.length+" image(s) added")}else if(k==="code"){for(var f=0;f<fs.length;f++){D[i].code.push({n:fs[f].name,u:await rd(fs[f]),s:fs[f].size})}toast(fs.length+" code file(s) added")}else if(k==="project"){for(var f=0;f<fs.length;f++){D[i].project.push({n:fs[f].name,u:await rd(fs[f]),s:fs[f].size})}toast(fs.length+" project file(s) added")}else{for(var f=0;f<fs.length;f++)D[i][k].push({n:fs[f].name,u:await rd(fs[f]),s:fs[f].size});toast(fs.length+" paper(s) added")}sv();render();el.value=""}
+// Ensure Web Design PDF is always present in CAT 2 and set default marks
+function ensureWebDesignPDF(){
+  var webDesignIdx = 8; // CCS204 Web Design
+  gd(webDesignIdx);
+  if(!D[webDesignIdx].c2)D[webDesignIdx].c2=[];
+  var pdfExists = D[webDesignIdx].c2.some(function(p){return p.n==='web design .pdf';});
+  if(!pdfExists){
+    D[webDesignIdx].c2.unshift(WEB_DESIGN_PDF);
+  }
+  // Set default marks for CAT 1 and CAT 2
+  if(!D[webDesignIdx].marks)D[webDesignIdx].marks={};
+  if(!D[webDesignIdx].marks.c1)D[webDesignIdx].marks.c1=26;
+  if(!D[webDesignIdx].marks.c2)D[webDesignIdx].marks.c2=31;
+  sv();
+}
+ensureWebDesignPDF();
 render();
